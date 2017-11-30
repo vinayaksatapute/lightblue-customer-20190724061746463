@@ -25,6 +25,7 @@ repositories {
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile group: 'com.cloudant', name:'cloudant-client', version: '2.7.0'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
