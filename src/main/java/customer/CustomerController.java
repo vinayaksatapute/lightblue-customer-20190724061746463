@@ -48,34 +48,17 @@ public class CustomerController {
         logger.debug(cloudantProperties.toString());
         
         try {
-            logger.info("Connecting to cloudant at: " + cloudantProperties.getProtocol() + "://" + cloudantProperties.getHost() + ":" + cloudantProperties.getPort());
-            final CloudantClient cloudantClient = ClientBuilder.url(new URL(cloudantProperties.getProtocol() +"://"+ cloudantProperties.getHost() + ":" + cloudantProperties.getPort()))
+            String cldUrl = cloudantProperties.getProtocol() + "://" + cloudantProperties.getHost() + ":" + cloudantProperties.getPort();
+            logger.info("Connecting to cloudant at: " + cldUrl;
+            final CloudantClient cloudantClient = ClientBuilder.url(new URL(cldUrl))
                     .username(cloudantProperties.getUsername())
                     .password(cloudantProperties.getPassword())
                     .build();
-            
             cloudant = cloudantClient.database(cloudantProperties.getDatabase(), true);
-            
-            if (!cloudant.contains("_design/username_searchIndex")) {
-                final Map<String, Object> names = new HashMap<String, Object>();
-                names.put("index", "function(doc){index(\"usernames\", doc.username); }");
-
-                final Map<String, Object> indexes = new HashMap<>();
-                indexes.put("usernames", names);
-
-                final Map<String, Object> view_ddoc = new HashMap<>();
-                view_ddoc.put("_id", "_design/username_searchIndex");
-                view_ddoc.put("indexes", indexes);
-
-                cloudant.save(view_ddoc);        
-            }
-            
         } catch (MalformedURLException e) {
             logger.error(e.getMessage(), e);
             throw e;
         }
-        
-
     }
     
     private Database cloudant  {
