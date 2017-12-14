@@ -130,7 +130,7 @@ public class CustomerController {
             if (payload.getCustomerId() != null && cloudant.contains(payload.getCustomerId())) {
                 return ResponseEntity.badRequest().body("Id " + payload.getCustomerId() + " already exists");
             }
-            final List<Customer> customers = getCloudantDatabase().findByIndex(
+            final List<Customer> customers = cloudant.findByIndex(
 				"{ \"selector\": { \"username\": \"" + payload.getUsername() + "\" } }", 
 				Customer.class);
             if (!customers.isEmpty()) {
