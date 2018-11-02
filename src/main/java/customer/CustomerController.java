@@ -49,7 +49,7 @@ public class CustomerController {
         
         try {
             String cldUrl = cloudantProperties.getProtocol() + "://" + cloudantProperties.getHost() + ":" + cloudantProperties.getPort();
-            logger.info("Connecting to cloudant at: " + cldUrl;
+            logger.info("Connecting to cloudant at: " + cldUrl);
             final CloudantClient cloudantClient = ClientBuilder.url(new URL(cldUrl))
                     .username(cloudantProperties.getUsername())
                     .password(cloudantProperties.getPassword())
@@ -61,10 +61,6 @@ public class CustomerController {
         }
     }
     
-    private Database cloudant  {
-        return cloudant;
-    }
-
     /**
      * @return customer by username
      */
